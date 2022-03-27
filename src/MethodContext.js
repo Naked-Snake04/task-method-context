@@ -27,7 +27,7 @@ obj1.first(1, 2, 3);
  */
 export const obj1 = {
     first(...args) {
-        this.second(...args.reverse);
+        this.second(...args.reverse());
     },
     second() {
         // здесь ничего писать не нужно
