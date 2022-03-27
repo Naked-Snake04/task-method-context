@@ -1,5 +1,7 @@
 import { EventEmitter } from './EventEmitter';
-
+function increaseValue(count) {
+    obj.count++;
+}
 /*
 1) В методе subscribe подпишитесь на событие click с помощью EventEmitter.on(eventName, callback).
 В обработчике нужно увеличивать значение поля count на 1
@@ -8,8 +10,13 @@ import { EventEmitter } from './EventEmitter';
  */
 export const obj = {
     count: 0,
-    subscribe() {},
-    unsubscribe() {},
+    func: increaseValue,
+    subscribe() {
+        EventEmitter.on('click', this.func);
+    },
+    unsubscribe() {
+        EventEmitter.off('click', this.func);
+    },
 };
 
 /*
@@ -19,7 +26,9 @@ obj1.first(1, 2, 3);
 // Внутренний вызов должен быть равносилен obj1.second(3, 2, 1)
  */
 export const obj1 = {
-    first(...args) {},
+    first(...args) {
+        this.second(...args.reverse);
+    },
     second() {
         // здесь ничего писать не нужно
     },
